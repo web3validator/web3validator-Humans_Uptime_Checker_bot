@@ -30,7 +30,8 @@ async def create_checker(callback : CallbackQuery, state: FSMContext):
 
     await callback.message.edit_text(
         'Let\'s see...\n'
-        'What\'s your validator name?'
+        "What's your validator name?\n"
+        "<b>Example</b>: web34ever or web34ever,cyberG,Mavpa..."
     )
 
     await state.set_state(CreateChecker.operator_address)
