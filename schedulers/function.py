@@ -16,6 +16,7 @@ def get_keys_redis(config: Config ) -> list:
         host=config.redis_config.host, 
         port=config.redis_config.port, 
         db=config.redis_config.db,
+        password=config.redis_config.password
         )
 
     keys_list = r.keys('*')
