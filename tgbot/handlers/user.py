@@ -21,8 +21,8 @@ async def user_start(message: Message, state: FSMContext, bot: Bot):
     if data == {}:
         data = f.create_dict()
 
-    if data['message_id'] != '':
-        await bot.delete_message(chat_id=message.chat.id, message_id=data["message_id"])
+    # if data['message_id'] != '':
+    #     await bot.delete_message(chat_id=message.chat.id, message_id=data["message_id"])
     
     logging.info(f"Message_id: {data['message_id']}")
     
