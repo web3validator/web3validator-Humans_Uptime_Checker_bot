@@ -85,6 +85,7 @@ You can delete your validator checker through delete checker command.
 <img width="372" alt="image" src="https://github.com/web3validator/web3validator-Humans_Uptime_Checker_bot/assets/59205554/1bb5020e-b739-423a-a286-eeee337bc4ee">
 
 enter your validator moniker 
+
 <img width="380" alt="image" src="https://github.com/web3validator/web3validator-Humans_Uptime_Checker_bot/assets/59205554/2b97dcaf-e323-4a8c-87ad-ae65a7fe7aae">
 
 you will se this massage : 
