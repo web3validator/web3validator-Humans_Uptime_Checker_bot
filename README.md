@@ -3,8 +3,7 @@ To run the bot, you need to do three things:
 
 1) Start Redis
 2) Install the necessary libraries
-3) Make changes to the configuration
-4) Run it through the service
+3) Run it through the service
 
 **Running Redis via Docker**
 ```
@@ -22,8 +21,30 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**Make changes to the configuration**
+**Run it through the service**
+```
+nano /etc/systemd/system/humans_bot.service
+```
+```
+[Unit]
+Description=Humans bot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/path/to/web3validator-Humans_Uptime_Checker_bot
+ExecStart=/path/to/web3validator-Humans_Uptime_Checker_bot/venv/bin/python bot.py
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
 ```
 
+Start service
 ```
-
+systemctl enable humans_bot
+systemctl start humans_bot
+```
