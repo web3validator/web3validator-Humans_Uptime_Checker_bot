@@ -1,4 +1,4 @@
-# checker_bot
+# Humans checker_bot
 Uptime Checker bot
 
 Web3 Validator team has developed the checker bot that can monitor your node uptime. We can implement it on various Cosmos SDK networks and will gladly add it to humans mainnet network as soons as it will alive!
