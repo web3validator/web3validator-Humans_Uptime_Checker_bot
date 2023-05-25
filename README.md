@@ -3,7 +3,8 @@ To run the bot, you need to do three things:
 
 1) Start Redis
 2) Install the necessary libraries
-3) Run it through the service
+3) Make changes to the configuration
+4) Run it through the service
 
 **Running Redis via Docker**
 ```
@@ -20,6 +21,13 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+**Make changes to the configuration**
+```
+nano .env.exemple .env
+nano .env
+```
+You should change everything according to your own parameters.
 
 **Run it through the service**
 ```
