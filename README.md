@@ -91,7 +91,7 @@ you will se this massage :
 
 <img width="377" alt="image" src="https://github.com/web3validator/web3validator-Humans_Uptime_Checker_bot/assets/59205554/6e91721f-e496-44eb-afa2-9ef4fab04f1c">
 
-If you will start skip the blocks , bot will ping ypu every 10 minutes 
+If you will start skip the blocks , bot will ping ypu every 5 minutes 
 
 <img width="369" alt="image" src="https://github.com/web3validator/web3validator-Humans_Uptime_Checker_bot/assets/59205554/dd2d64fb-0c28-45ef-be13-88854b2ef16a">
 
