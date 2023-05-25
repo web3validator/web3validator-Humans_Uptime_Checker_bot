@@ -72,7 +72,7 @@ It's just super convenient:
 
 *Clear and pleasant interface and validator status check. Also this bot can be customizable and it may add many other functions. We already implement it in many known cosmos-networks.
 
-### Guide how to add checker to your validator:
+### how to add checker to your validator:
 Start your bot in your telegram account https://t.me/HumansUpTime_bot
 
 Then you can add validator checker through create checker button. 
