@@ -1,28 +1,25 @@
 #Name network
-network = "bostrom"
+network = "humans"
 
 #Відсоток підписаних блоків валідатором
-min_signed_per_window = 75
+min_signed_per_window = 50
 
 #Кількісь блоків з якого вирахоується дозволений відсоток пропуску
-signed_blocks_window = 8000
+signed_blocks_window = 1200
 
 #Час створення блоку в секундах
 time_create_block = 5.5
 
 #
 rpc= [
-    "http://176.36.248.34:26657", 
+    'http://65.108.228.178:16657'
     ]
 
 #Шлях до бінарника
-path_bin = "/home/ubuntu/go/bin/cyber"
+path_bin = "/path/to/humansd"
 
 #Час для повторної перевірки
 time_repeat = 1
 
 #Кількість допущених блоків за цей час
-missed_blocks = 90
-
-# [params]
-# skipped_blocks_allowed = {{ signed_blocks_window }} * ( (100 - {{ min_signed_per_window }}) / 100 ) # не допуста кількість пропущених блоків
+missed_blocks = 8
