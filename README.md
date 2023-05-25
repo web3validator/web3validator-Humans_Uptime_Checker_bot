@@ -72,6 +72,8 @@ It's just super convenient:
 
 *Clear and pleasant interface and validator status check. Also this bot can be customizable and it may add many other functions. We already implement it in many known cosmos-networks.
 
+*Auto-reporting bug/errors mechanism
+
 ### how to add checker to your validator:
 Start your bot in your telegram account https://t.me/HumansUpTime_bot
 
