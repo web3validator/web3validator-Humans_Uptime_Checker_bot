@@ -44,20 +44,40 @@ async def enter_operator_address(message : Message, state: FSMContext,
                                 #  scheduler: AsyncIOScheduler,
                                  bot : Bot):
     config = toml.load('config.toml')
+    # """Enter validator's name"""
+    await asyncio.sleep(1)
+    await message.delete()
+    a = await bot.send_message(chat_id=message.from_user.id, text="Wait I'm processing the information", request_timeout=6)
+
     urls = await fun.check_url()
+    data = await state.get_data()
+    id_message=data["message_id"]
+
+    await asyncio.sleep(1)
+    await bot.delete_message(chat_id=message.from_user.id, message_id=a.message_id)
+
+    if urls["active_urls"] == []:
+
+        await bot.edit_message_text(
+        f'Sorry, rpc not working 🔴',
+        chat_id=message.from_user.id,
+        message_id=id_message,
+        reply_markup=to_menu(), 
+        )
+
+        return
+    
     url = urls["active_urls"][0]
     get_monikers = message.text
     moniker_list = get_monikers.split(",")
     list_validators = ''
 
-    """Enter validator's name"""
-    await asyncio.sleep(1)
-    await message.delete()
+    
+   
+
 
     logging.info(f"I create new validator/validators")
     
-    data = await state.get_data()
-    id_message=data["message_id"]
     
     
     

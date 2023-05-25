@@ -12,15 +12,14 @@ time_create_block = 5.5
 
 #
 rpc= [
-    "http://176.36.248.34:26657",
-    "https://rpc.bostrom.cybernode.ai:443" 
+    "http://176.36.248.34:26657", 
     ]
 
 #Шлях до бінарника
 path_bin = "/home/ubuntu/go/bin/cyber"
 
 #Час для повторної перевірки
-time_repeat = 10
+time_repeat = 1
 
 #Кількість допущених блоків за цей час
 missed_blocks = 90

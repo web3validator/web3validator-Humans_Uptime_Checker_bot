@@ -24,6 +24,18 @@ async def check_user_node(
     time_repeat = config_toml["time_repeat"]
     allow_missed_block = config_toml["missed_blocks"]
     urls = await check_url()
+
+    if urls["active_urls"] == []:
+
+        for id in config.tg_bot.admin_ids:
+            logging.info(id)
+            await bot.send_message(
+            chat_id=id,
+            text=f'RPC not working 🔴, network {config_toml["network"]}',
+            )
+
+        return 
+    
     url = urls["active_urls"][0]
 
     keys = get_keys_redis(config)

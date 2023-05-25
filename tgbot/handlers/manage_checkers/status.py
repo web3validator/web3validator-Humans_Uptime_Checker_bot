@@ -72,12 +72,21 @@ async def enter_operator_address(callback: CallbackQuery, state: FSMContext):
     logging.info(f"I display the status on the screen {callback.from_user.id}")
 
     data = await state.get_data()
-    # urls = check_url()
-    # url = urls["active_urls"][0]
-    url = data["rpc"]["active_urls"][0]
+    urls = await check_url()
+    active_rpc = urls["numer_active"]
+    number_rpc = urls["urls"]
+
+    if urls["active_urls"] == []:
+        await callback.answer(
+        f'Sorry, rpc not working 🔴',
+        show_alert=True, 
+    )
+        return
+
+    url = urls["active_urls"][0]
+    # url = data["rpc"]["active_urls"][0]
+
     
-    active_rpc = data["rpc"]["numer_active"]
-    number_rpc = data["rpc"]["urls"]
 
 
     validators = await get_validators(url)
@@ -100,8 +109,7 @@ async def enter_operator_address(callback: CallbackQuery, state: FSMContext):
         f'\n    voting power: {validator["tokens"]}'
         f'\n    jailed:  {jail}'
         f'\n    validators status: {status}'
-        f'\n    missed blocks: {missed_block}'
-        f'\n    active rpc: {active_rpc}/{number_rpc}',
+        f'\n    missed blocks: {missed_block}',
         show_alert=True, 
     )
 

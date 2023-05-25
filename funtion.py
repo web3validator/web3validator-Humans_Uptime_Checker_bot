@@ -1,20 +1,28 @@
-import subprocess, logging, toml, requests, json, asyncio
+import subprocess
+import logging
+import toml
+import requests
+import json
+import asyncio
+
 
 def create_dict():
     data = {
         "message_id": '',
         "validators": {},
-        "rpc": {}, 
+        "rpc": {},
     }
 
     return data
+
 
 async def terminal(cmd: str | list = None, password: str = "None"):
     try:
         if type(cmd) != type(list()):
             cmd = cmd.split()
         p1 = subprocess.Popen(["echo", password], stdout=subprocess.PIPE)
-        p2 = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=p1.stdout)
+        p2 = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE, stdin=p1.stdout)
         output = p2.communicate()
         p1.stdout.close()
         p2.stdout.close()
@@ -26,7 +34,6 @@ async def terminal(cmd: str | list = None, password: str = "None"):
 async def get_validators(url: str) -> list:
     config = toml.load("config.toml")
     bin = config["path_bin"]
-    
 
     validators = await terminal(f"{bin} q staking validators --node {url} --limit 1000 -o json")
     output = validators[0].decode('utf-8')
@@ -35,15 +42,15 @@ async def get_validators(url: str) -> list:
     if output != '':
         output = json.loads(output)
         output = output["validators"]
-    
+
     elif error != '':
         pass
 
-
     return output
 
+
 async def check_url() -> dict:
-   
+
     config = toml.load("config.toml")
 
     urls = config["rpc"]
@@ -52,7 +59,7 @@ async def check_url() -> dict:
 
     for url in urls:
         try:
-            
+
             response = requests.get(url)
 
             if response.status_code == 200:
@@ -62,21 +69,21 @@ async def check_url() -> dict:
             else:
                 logging.info(f"Url {url} is {response.status_code}")
         except requests.exceptions.RequestException as e:
-            logging.error(f'An error occurred while accessing the website {url}: {e}')
+            logging.error(
+                f'An error occurred while accessing the website {url}: {e}')
 
     data["urls"] = len(urls)
 
     return data
 
 
-
 async def get_index_by_moniker(moniker: str, validators: list) -> int:
     for index, val in enumerate(validators):
         # current_moniker = val.get("description").get("moniker")
-        #logging.info(f"{index} - {current_moniker}. Seeking: {moniker}")
+        # logging.info(f"{index} - {current_moniker}. Seeking: {moniker}")
         if val.get("description").get("moniker") == moniker:
-            return int(index) 
-        
+            return int(index)
+
 
 #
 # Get slashing block
@@ -94,19 +101,20 @@ async def slashing_signing_info(key: str, url: str):
     }
     p_json = json.dumps(p_variable)
 
-    cmd = [bin, 'q', 'slashing', 'signing-info', p_json, '--node', url, '-o', 'json']
+    cmd = [bin, 'q', 'slashing', 'signing-info',
+           p_json, '--node', url, '-o', 'json']
     result = await terminal(cmd)
     output = result[0].decode('utf-8')
     error = result[1].decode('utf-8')
 
     if output != '':
         output = json.loads(output)
-        
-    
+
     elif error != '':
         pass
 
     return output
+
 
 async def missed_block_counter(moniker):
     validators = await get_validators()
@@ -119,19 +127,22 @@ async def missed_block_counter(moniker):
 
 # asyncio.run(missed_block_counter('ToTheMars'))
 
+
 async def get_index_by_consAddr(const_addr: str, signing_infos: list) -> int:
     for index, val in enumerate(signing_infos):
         # current_moniker = val.get("description").get("moniker")
-        #logging.info(f"{index} - {current_moniker}. Seeking: {moniker}")
+        # logging.info(f"{index} - {current_moniker}. Seeking: {moniker}")
         if val.get("address") == const_addr:
-            return index 
-        
-async def slashing_signing_info_all( url: str) -> list:
+            return index
+
+
+async def slashing_signing_info_all(url: str) -> list:
 
     config = toml.load("config.toml")
     bin = config["path_bin"]
 
-    cmd = [bin, 'q', 'slashing', 'signing-infos',  '--limit', '1000', '--node', url, '-o', 'json']
+    cmd = [bin, 'q', 'slashing', 'signing-infos',
+           '--limit', '1000', '--node', url, '-o', 'json']
     result = await terminal(cmd)
     output = result[0].decode('utf-8')
     error = result[1].decode('utf-8')
@@ -139,7 +150,7 @@ async def slashing_signing_info_all( url: str) -> list:
     if output != '':
         output = json.loads(output)
         output = output["info"]
-    
+
     elif error != '':
         pass
 
